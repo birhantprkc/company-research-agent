@@ -116,8 +116,8 @@ https://github.com/user-attachments/assets/0e373146-26a7-4391-b973-224ded3182a9
 
 1. 저장소 클론:
 ```bash
-git clone https://github.com/guy-hartstein/tavily-company-research.git
-cd tavily-company-research
+git clone https://github.com/guy-hartstein/company-research-agent.git
+cd company-research-agent
 ```
 
 2. 설정 스크립트를 실행 가능하게 만들고 실행:
@@ -154,8 +154,8 @@ chmod +x setup.sh
 
 1. 저장소 클론:
 ```bash
-git clone https://github.com/guy-hartstein/tavily-company-research.git
-cd tavily-company-research
+git clone https://github.com/guy-hartstein/company-research-agent.git
+cd company-research-agent
 ```
 
 2. 백엔드 종속성 설치:
@@ -221,8 +221,8 @@ VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
 
 1. 저장소 클론:
 ```bash
-git clone https://github.com/guy-hartstein/tavily-company-research.git
-cd tavily-company-research
+git clone https://github.com/guy-hartstein/company-research-agent.git
+cd company-research-agent
 ```
 
 2. **환경 변수 설정**:

@@ -116,8 +116,8 @@ https://github.com/user-attachments/assets/0e373146-26a7-4391-b973-224ded3182a9
 
 1. リポジトリをクローン：
 ```bash
-git clone https://github.com/guy-hartstein/tavily-company-research.git
-cd tavily-company-research
+git clone https://github.com/guy-hartstein/company-research-agent.git
+cd company-research-agent
 ```
 
 2. セットアップスクリプトを実行可能にして実行：
@@ -154,8 +154,8 @@ chmod +x setup.sh
 
 1. リポジトリをクローン：
 ```bash
-git clone https://github.com/guy-hartstein/tavily-company-research.git
-cd tavily-company-research
+git clone https://github.com/guy-hartstein/company-research-agent.git
+cd company-research-agent
 ```
 
 2. バックエンド依存関係をインストール：
@@ -221,8 +221,8 @@ VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
 
 1. リポジトリをクローン：
 ```bash
-git clone https://github.com/guy-hartstein/tavily-company-research.git
-cd tavily-company-research
+git clone https://github.com/guy-hartstein/company-research-agent.git
+cd company-research-agent
 ```
 
 2. **環境変数の設定**：
