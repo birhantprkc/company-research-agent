@@ -335,25 +335,6 @@ npm run dev
 
 アプリケーションは様々なクラウドプラットフォームにデプロイできます。一般的なオプションをいくつか紹介します：
 
-#### AWS Elastic Beanstalk
-
-1. EB CLIをインストール：
-   ```bash
-   pip install awsebcli
-   ```
-
-2. EBアプリケーションを初期化：
-   ```bash
-   eb init -p python-3.11 tavily-research
-   ```
-
-3. 作成・デプロイ：
-   ```bash
-   eb create tavily-research-prod
-   ```
-
-#### その他のデプロイメントオプション
-
 - **Docker**：アプリケーションにはコンテナ化デプロイメント用のDockerfileが含まれています
 - **Heroku**：PythonビルドパックでGitHubから直接デプロイ
 - **Google Cloud Run**：自動スケーリング付きコンテナ化デプロイメントに適しています

@@ -334,25 +334,6 @@ npm run dev
 
 La aplicación puede desplegarse en varias plataformas en la nube. Aquí hay algunas opciones comunes:
 
-#### AWS Elastic Beanstalk
-
-1. Instalar el EB CLI:
-   ```bash
-   pip install awsebcli
-   ```
-
-2. Inicializar la aplicación EB:
-   ```bash
-   eb init -p python-3.11 tavily-research
-   ```
-
-3. Crear y desplegar:
-   ```bash
-   eb create tavily-research-prod
-   ```
-
-#### Otras Opciones de Despliegue
-
 - **Docker**: La aplicación incluye un Dockerfile para despliegue en contenedores
 - **Heroku**: Despliegue directamente desde GitHub con el buildpack de Python
 - **Google Cloud Run**: Adecuado para despliegue en contenedores con escalado automático

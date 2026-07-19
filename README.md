@@ -335,25 +335,6 @@ npm run dev
 
 The application can be deployed to various cloud platforms. Here are some common options:
 
-#### AWS Elastic Beanstalk
-
-1. Install the EB CLI:
-   ```bash
-   pip install awsebcli
-   ```
-
-2. Initialize EB application:
-   ```bash
-   eb init -p python-3.11 tavily-research
-   ```
-
-3. Create and deploy:
-   ```bash
-   eb create tavily-research-prod
-   ```
-
-#### Other Deployment Options
-
 - **Docker**: The application includes a Dockerfile for containerized deployment
 - **Heroku**: Deploy directly from GitHub with the Python buildpack
 - **Google Cloud Run**: Suitable for containerized deployment with automatic scaling

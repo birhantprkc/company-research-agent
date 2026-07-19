@@ -335,25 +335,6 @@ npm run dev
 
 애플리케이션은 다양한 클라우드 플랫폼에 배포할 수 있습니다. 몇 가지 일반적인 옵션은 다음과 같습니다:
 
-#### AWS Elastic Beanstalk
-
-1. EB CLI 설치:
-   ```bash
-   pip install awsebcli
-   ```
-
-2. EB 애플리케이션 초기화:
-   ```bash
-   eb init -p python-3.11 tavily-research
-   ```
-
-3. 생성 및 배포:
-   ```bash
-   eb create tavily-research-prod
-   ```
-
-#### 기타 배포 옵션
-
 - **Docker**: 애플리케이션에는 컨테이너화된 배포를 위한 Dockerfile이 포함되어 있습니다
 - **Heroku**: Python 빌드팩으로 GitHub에서 직접 배포
 - **Google Cloud Run**: 자동 스케일링을 통한 컨테이너화된 배포에 적합

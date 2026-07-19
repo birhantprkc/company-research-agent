@@ -335,25 +335,6 @@ npm run dev
 
 该应用程序可以部署到各种云平台。以下是一些常见选项：
 
-#### AWS Elastic Beanstalk
-
-1. 安装EB CLI：
-   ```bash
-   pip install awsebcli
-   ```
-
-2. 初始化EB应用：
-   ```bash
-   eb init -p python-3.11 tavily-research
-   ```
-
-3. 创建并部署：
-   ```bash
-   eb create tavily-research-prod
-   ```
-
-#### 其他部署选项
-
 - **Docker**：应用程序包含用于容器化部署的Dockerfile
 - **Heroku**：使用Python构建包直接从GitHub部署
 - **Google Cloud Run**：适用于具有自动扩展功能的容器化部署

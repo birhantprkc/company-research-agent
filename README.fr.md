@@ -345,29 +345,6 @@ npm run dev
 
 > **⚡ Note de Performance** : Si vous avez utilisé `uv` lors de l'installation, vous bénéficierez d'une installation de paquets et d'une résolution de dépendances significativement plus rapides. `uv` est un gestionnaire de paquets Python moderne écrit en Rust qui peut être 10 à 100 fois plus rapide que pip.
 
-### Options de Déploiement
-
-L'application peut être déployée sur diverses plateformes cloud. Voici quelques options courantes :
-
-#### AWS Elastic Beanstalk
-
-1. Installez l'EB CLI :
-
-   ```bash
-   pip install awsebcli
-   ```
-
-2. Initialisez l'application EB :
-
-   ```bash
-   eb init -p python-3.11 tavily-research
-   ```
-
-3. Créez et déployez :
-
-   ```
-   ```
-
 ## Star History
 
 <a href="https://www.star-history.com/?repos=guy-hartstein%2Fcompany-research-agent&type=date&legend=top-left">
