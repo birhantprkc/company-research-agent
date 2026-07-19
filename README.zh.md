@@ -116,8 +116,8 @@ https://github.com/user-attachments/assets/071aa491-009b-4d76-a698-88863149e71c
 
 1. 克隆仓库：
 ```bash
-git clone https://github.com/guy-hartstein/tavily-company-research.git
-cd tavily-company-research
+git clone https://github.com/guy-hartstein/company-research-agent.git
+cd company-research-agent
 ```
 
 2. 使安装脚本可执行并运行：
@@ -154,8 +154,8 @@ chmod +x setup.sh
 
 1. 克隆仓库：
 ```bash
-git clone https://github.com/guy-hartstein/tavily-company-research.git
-cd tavily-company-research
+git clone https://github.com/guy-hartstein/company-research-agent.git
+cd company-research-agent
 ```
 
 2. 安装后端依赖：
@@ -221,8 +221,8 @@ VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
 
 1. 克隆仓库：
 ```bash
-git clone https://github.com/guy-hartstein/tavily-company-research.git
-cd tavily-company-research
+git clone https://github.com/guy-hartstein/company-research-agent.git
+cd company-research-agent
 ```
 
 2. **设置环境变量**：

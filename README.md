@@ -116,8 +116,8 @@ The easiest way to get started is using the setup script, which automatically de
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/guy-hartstein/tavily-company-research.git
-cd tavily-company-research
+git clone https://github.com/guy-hartstein/company-research-agent.git
+cd company-research-agent
 ```
 
 2. Make the setup script executable and run it:
@@ -154,8 +154,8 @@ If you prefer to set up manually, follow these steps:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/guy-hartstein/tavily-company-research.git
-cd tavily-company-research
+git clone https://github.com/guy-hartstein/company-research-agent.git
+cd company-research-agent
 ```
 
 2. Install backend dependencies:
@@ -221,8 +221,8 @@ The application can be run using Docker and Docker Compose:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/guy-hartstein/tavily-company-research.git
-cd tavily-company-research
+git clone https://github.com/guy-hartstein/company-research-agent.git
+cd company-research-agent
 ```
 
 2. **Set up Environment Variables**:

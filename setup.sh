@@ -239,5 +239,5 @@ fi
 
 echo -e "\n${BOLD}Need help?${NC}"
 echo "- Documentation: README.md"
-echo "- Issues: https://github.com/guy-hartstein/tavily-company-research/issues"
+echo "- Issues: https://github.com/guy-hartstein/company-research-agent/issues"
 echo -e "\n${GREEN}Happy researching! 🚀${NC}"

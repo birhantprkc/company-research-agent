@@ -116,8 +116,8 @@ La façon la plus simple de commencer est d'utiliser le script de configuration,
 
 1. Clonez le dépôt :
 ```bash
-git clone https://github.com/guy-hartstein/tavily-company-research.git
-cd tavily-company-research
+git clone https://github.com/guy-hartstein/company-research-agent.git
+cd company-research-agent
 ```
 
 2. Rendez le script de configuration exécutable et lancez-le :
@@ -156,8 +156,8 @@ Si vous préférez configurer manuellement, suivez ces étapes :
 1. Clonez le dépôt :
 
 ```bash
-git clone https://github.com/guy-hartstein/tavily-company-research.git
-cd tavily-company-research
+git clone https://github.com/guy-hartstein/company-research-agent.git
+cd company-research-agent
 ```
 
 2. Installez les dépendances backend :
@@ -226,8 +226,8 @@ L'application peut être exécutée à l'aide de Docker et Docker Compose :
 1. Clonez le dépôt :
 
 ```bash
-git clone https://github.com/guy-hartstein/tavily-company-research.git
-cd tavily-company-research
+git clone https://github.com/guy-hartstein/company-research-agent.git
+cd company-research-agent
 ```
 
 2. **Configuration des Variables d'Environnement** :
