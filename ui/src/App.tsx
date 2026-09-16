@@ -48,7 +48,7 @@ function App() {
   const [isReportStreaming, setIsReportStreaming] = useState(false);
 
   // Add new state for color cycling
-  const [loaderColor, setLoaderColor] = useState("#468BFF");
+  const [loaderColor, setLoaderColor] = useState("#2677FF");
   
   // Scroll helper function
   const scrollToStatus = () => {
@@ -65,7 +65,7 @@ function App() {
     if (!isResearching) return;
     
     const colors = [
-      "#468BFF", // Blue
+      "#2677FF", // Blue
       "#8FBCFA", // Light Blue
       "#FE363B", // Red
       "#FF9A9D", // Light Red
@@ -491,11 +491,15 @@ function App() {
 
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white via-gray-50 to-white p-8 relative">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(70,139,255,0.35)_1px,transparent_0)] bg-[length:24px_24px] bg-center"></div>
-      <div className="max-w-5xl mx-auto space-y-8 relative">
+    <div className="app-shell">
+      <div className="landscape-background" aria-hidden="true">
+        <img src="/tavily-landscape.webp" alt="" />
+        <div className="landscape-fade-top" />
+        <div className="landscape-fade-bottom" />
+      </div>
+      <div className="research-workspace">
         {/* Header Component */}
-        <Header glassStyle={glassStyle.card} />
+        <Header />
 
         {/* Form Section */}
         <ResearchForm 
@@ -508,7 +512,7 @@ function App() {
         {/* Error Message */}
         {error && (
           <div 
-            className={`${glassStyle.card} border-[#FE363B]/30 bg-[#FE363B]/10 ${fadeInAnimation.fadeIn} ${isResetting ? 'opacity-0 transform -translate-y-4' : 'opacity-100 transform translate-y-0'} font-['DM_Sans']`}
+            className={`${glassStyle.card} border-[#FE363B]/30 bg-[#FE363B]/10 ${fadeInAnimation.fadeIn} ${isResetting ? 'opacity-0 transform -translate-y-4' : 'opacity-100 transform translate-y-0'} font-sans`}
           >
             <p className="text-[#FE363B]">{error}</p>
           </div>

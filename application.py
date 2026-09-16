@@ -71,6 +71,15 @@ async def research(data: ResearchRequest):
     try:
         logger.info(f"Received research request for {data.company}")
         job_id = str(uuid.uuid4())
+
+        # Create the job before starting the background task. The SSE endpoint
+        # begins polling immediately after this response; without this entry it
+        # can time out while initial research work is still running.
+        job_status[job_id].update({
+            "status": "pending",
+            "company": data.company,
+            "last_update": datetime.now().isoformat(),
+        })
         asyncio.create_task(process_research(job_id, data))
 
         response = JSONResponse(content={

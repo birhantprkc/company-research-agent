@@ -42,7 +42,7 @@ const CurationExtraction = ({
       <div className={`overflow-hidden transition-all duration-500 ease-in-out ${
         isExpanded ? 'mt-4 max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
       }`}>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {['company', 'industry', 'financial', 'news'].map((category) => {
             const counts = enrichmentCounts?.[category as keyof EnrichmentCounts];
             return (
@@ -51,7 +51,7 @@ const CurationExtraction = ({
                 <div className="text-gray-900">
                   <div className="text-2xl font-bold mb-1">
                     {counts ? (
-                      <span className="text-[#468BFF]">
+                      <span className="text-[#2677FF]">
                         {counts.enriched}
                       </span>
                     ) : (

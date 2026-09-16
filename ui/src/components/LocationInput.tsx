@@ -151,7 +151,7 @@ const LocationInput = ({ value, onChange, className }: LocationInputProps) => {
           border: 1px solid rgba(70, 139, 255, 0.1) !important;
           border-radius: 0.75rem !important;
           margin-top: 0.5rem !important;
-          font-family: "Noto Sans", sans-serif !important;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
           overflow: hidden !important;
           box-shadow: none !important;
         }
@@ -190,7 +190,7 @@ const LocationInput = ({ value, onChange, className }: LocationInputProps) => {
         /* Style for the new PlaceAutocompleteElement */
         gmp-place-autocomplete {
           width: 100% !important;
-          --gmp-place-autocomplete-font-family: "DM Sans", sans-serif !important;
+          --gmp-place-autocomplete-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
         }
       `;
       document.head.appendChild(style);
@@ -226,10 +226,10 @@ const LocationInput = ({ value, onChange, className }: LocationInputProps) => {
 
   return (
     <div className="relative group">
-      <div className="absolute inset-0 bg-gradient-to-r from-gray-50/0 via-gray-100/50 to-gray-50/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg"></div>
-      <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 stroke-[#468BFF] transition-all duration-200 group-hover:stroke-[#8FBCFA] z-10" strokeWidth={1.5} />
+      <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 stroke-[#2677FF] transition-all duration-200 group-hover:stroke-[#8FBCFA] z-10" strokeWidth={1.5} />
       <input
         ref={inputRef}
+        id="companyHq"
         type="text"
         value={value}
         onChange={handleInputChange}
@@ -238,7 +238,7 @@ const LocationInput = ({ value, onChange, className }: LocationInputProps) => {
             e.preventDefault();
           }
         }}
-        className={`${className} !font-['DM_Sans']`}
+        className={`${className} !font-sans`}
         placeholder="City, Country"
       />
     </div>

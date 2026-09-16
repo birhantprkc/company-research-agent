@@ -38,10 +38,10 @@ const ResearchReport = ({
 
   return (
     <div 
-      className={`${glassStyle.card} ${fadeInAnimation.fadeIn} ${isResetting ? 'opacity-0 transform -translate-y-4' : 'opacity-100 transform translate-y-0'} font-['DM_Sans']`}
+      className={`${glassStyle.card} ${fadeInAnimation.fadeIn} ${isResetting ? 'opacity-0 transform -translate-y-4' : 'opacity-100 transform translate-y-0'} font-sans`}
     >
       {isStreaming && (
-        <div className="flex items-center gap-2 mb-4 px-4 py-2 bg-[#468BFF]/10 rounded-lg border border-[#468BFF]/20">
+        <div className="flex items-center gap-2 mb-4 px-4 py-2 bg-[#2677FF]/10 rounded-lg border border-[#2677FF]/20">
           <Loader2 className="h-4 w-4 animate-spin" style={{ stroke: loaderColor }} />
           <span className="text-sm text-gray-600">Generating report...</span>
         </div>
@@ -51,7 +51,8 @@ const ResearchReport = ({
           <>
             <button
               onClick={onCopyToClipboard}
-              className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-[#468BFF] text-white hover:bg-[#8FBCFA] transition-all duration-200"
+              aria-label={isCopied ? "Report copied" : "Copy report"}
+              className="report-action"
             >
               {isCopied ? (
                 <Check className="h-5 w-5" />
@@ -62,7 +63,7 @@ const ResearchReport = ({
             <button
               onClick={onGeneratePdf}
               disabled={isGeneratingPdf}
-              className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-[#FFB800] text-white hover:bg-[#FFA800] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="report-action disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isGeneratingPdf ? (
                 <>
@@ -79,7 +80,7 @@ const ResearchReport = ({
           </>
         )}
       </div>
-      <div className="prose prose-invert prose-lg max-w-none">
+      <div className="report-content">
         <div className="mt-4">
           <ReactMarkdown
             rehypePlugins={[rehypeRaw]}
@@ -95,7 +96,7 @@ const ResearchReport = ({
                 return (
                   <div>
                     <h1 
-                      className={`font-bold text-gray-900 break-words whitespace-pre-wrap ${isFirstH1 ? 'text-5xl mb-10 mt-4 max-w-[calc(100%-8rem)]' : 'text-3xl mb-6'}`} 
+                      className={`font-bold text-gray-900 break-words whitespace-pre-wrap ${isFirstH1 ? 'text-2xl sm:text-3xl mb-6 mt-4' : 'text-2xl mb-6'}`}
                       {...props} 
                     >
                       {children}
@@ -107,7 +108,7 @@ const ResearchReport = ({
                 );
               },
               h2: ({node, ...props}) => (
-                <h2 className="text-3xl font-bold text-gray-900 first:mt-2 mt-8 mb-4" {...props} />
+                <h2 className="text-xl font-semibold text-gray-900 first:mt-2 mt-8 mb-4 pb-2 border-b border-gray-200" {...props} />
               ),
               h3: ({node, ...props}) => (
                 <h3 className="text-xl font-semibold text-gray-900 mt-6 mb-3" {...props} />
@@ -151,7 +152,7 @@ const ResearchReport = ({
                           <a 
                             key={i}
                             href={part}
-                            className="text-[#468BFF] hover:text-[#8FBCFA] underline decoration-[#468BFF] hover:decoration-[#8FBCFA] cursor-pointer transition-colors"
+                            className="text-[#2677FF] hover:text-[#8FBCFA] underline decoration-[#2677FF] hover:decoration-[#8FBCFA] cursor-pointer transition-colors"
                             target="_blank"
                             rel="noopener noreferrer"
                           >
@@ -174,7 +175,7 @@ const ResearchReport = ({
               a: ({node, href, ...props}) => (
                 <a 
                   href={href}
-                  className="text-[#468BFF] hover:text-[#8FBCFA] underline decoration-[#468BFF] hover:decoration-[#8FBCFA] cursor-pointer transition-colors" 
+                  className="text-[#2677FF] hover:text-[#8FBCFA] underline decoration-[#2677FF] hover:decoration-[#8FBCFA] cursor-pointer transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
                   {...props} 

@@ -229,5 +229,5 @@ QUERY_FORMAT_GUIDELINES = """
 Important Guidelines:
 - Focus ONLY on {company}-specific information
 - Make queries very brief and to the point
-- Provide exactly 4 search queries (one per line), with no hyphens or dashes
+- Provide exactly 2 search queries (one per line), with no hyphens or dashes
 - DO NOT make assumptions about the industry - use only the provided industry information"""

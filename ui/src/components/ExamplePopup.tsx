@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
-import type { RefObject } from 'react';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 // Sample companies for examples
 export const EXAMPLE_COMPANIES = [
@@ -45,7 +43,29 @@ export const EXAMPLE_COMPANIES = [
     url: "spotify.com",
     hq: "Stockholm, Sweden",
     industry: "Music Streaming"
-  }
+  },
+  {
+    name: "Microsoft",
+    url: "microsoft.com",
+    hq: "Redmond, WA",
+    industry: "Software & Cloud Computing"
+  },
+  { name: "Apple", url: "apple.com", hq: "Cupertino, CA", industry: "Consumer Technology" },
+  { name: "Amazon", url: "amazon.com", hq: "Seattle, WA", industry: "E-commerce & Cloud Computing" },
+  { name: "Google", url: "google.com", hq: "Mountain View, CA", industry: "Internet & Software" },
+  { name: "Netflix", url: "netflix.com", hq: "Los Gatos, CA", industry: "Entertainment" },
+  { name: "Meta", url: "meta.com", hq: "Menlo Park, CA", industry: "Social Technology" },
+  { name: "Nvidia", url: "nvidia.com", hq: "Santa Clara, CA", industry: "Semiconductors & AI" },
+  { name: "Adobe", url: "adobe.com", hq: "San Jose, CA", industry: "Creative Software" },
+  { name: "Figma", url: "figma.com", hq: "San Francisco, CA", industry: "Design Software" },
+  { name: "Zoom", url: "zoom.us", hq: "San Jose, CA", industry: "Communications Software" },
+  { name: "Salesforce", url: "salesforce.com", hq: "San Francisco, CA", industry: "Enterprise Software" },
+  { name: "Uber", url: "uber.com", hq: "San Francisco, CA", industry: "Mobility & Delivery" },
+  { name: "Coinbase", url: "coinbase.com", hq: "Remote", industry: "Financial Technology" },
+  { name: "Datadog", url: "datadoghq.com", hq: "New York, NY", industry: "Cloud Monitoring" },
+  { name: "Snowflake", url: "snowflake.com", hq: "Bozeman, MT", industry: "Cloud Data Platform" },
+  { name: "Canva", url: "canva.com", hq: "Sydney, Australia", industry: "Design Software" },
+  { name: "Atlassian", url: "atlassian.com", hq: "Sydney, Australia", industry: "Collaboration Software" }
 ];
 
 export type ExampleCompany = typeof EXAMPLE_COMPANIES[0];
@@ -53,71 +73,23 @@ export type ExampleCompany = typeof EXAMPLE_COMPANIES[0];
 export interface ExamplePopupProps {
   visible: boolean;
   onExampleSelect: (example: ExampleCompany) => void;
-  glassStyle: {
-    card: string;
-    input: string;
-  };
-  exampleRef: RefObject<HTMLDivElement>;
+
 }
 
-// Example Popup Component
-const ExamplePopup = ({
-  visible,
-  onExampleSelect,
-  glassStyle,
-  exampleRef
-}: ExamplePopupProps) => {
-  const [selectedExample, setSelectedExample] = useState(0);
-  const [isNameAnimating, setIsNameAnimating] = useState(false);
-  
-  // Cycle through examples periodically
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Trigger name animation
-      setIsNameAnimating(true);
-      setTimeout(() => {
-        setSelectedExample((prev) => (prev + 1) % EXAMPLE_COMPANIES.length);
-        setTimeout(() => {
-          setIsNameAnimating(false);
-        }, 150);
-      }, 150);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
+// Keep suggestions in the document flow on both desktop and mobile.
+const ExamplePopup = ({ visible, onExampleSelect }: ExamplePopupProps) => {
   if (!visible) return null;
-
   return (
-    <div 
-      ref={exampleRef}
-      className={`absolute -top-14 left-8 ${glassStyle.card} bg-white/90 shadow-lg border-blue-200 cursor-pointer z-10 
-                 flex items-center px-3 py-2 space-x-2 transform transition-all duration-300 
-                 hover:shadow-xl hover:bg-white/95 hover:-translate-y-1 hover:border-blue-300 group`}
-      onClick={() => onExampleSelect(EXAMPLE_COMPANIES[selectedExample])}
-      style={{
-        borderTopLeftRadius: '12px',
-        borderTopRightRadius: '12px',
-        borderBottomRightRadius: '12px',
-        borderBottomLeftRadius: '4px',
-      }}
-    >
-      <Sparkles className="h-4 w-4 text-blue-500 group-hover:text-blue-600 animate-pulse group-hover:animate-none group-hover:scale-110 transition-all" />
-      <div>
-        <span className="text-sm font-medium text-gray-700 group-hover:text-gray-800 transition-colors">Try an example: </span>
-        <span 
-          className={`text-sm font-bold text-blue-600 group-hover:text-blue-700 transition-all inline-block
-            ${isNameAnimating ? 'opacity-0 transform -translate-y-3 scale-95' : 'opacity-100 transform translate-y-0 scale-100'}`}
-          style={{ 
-            transitionDuration: '150ms',
-            transitionTimingFunction: 'cubic-bezier(0.2, 0, 0.4, 1)'
-          }}
-        >
-          {EXAMPLE_COMPANIES[selectedExample].name}
-        </span>
-      </div>
-      <ArrowRight className="h-3.5 w-3.5 text-blue-500 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all" />
+    <div className="example-suggestions">
+      <span>Try researching</span>
+      {EXAMPLE_COMPANIES.map((company) => (
+        <button key={company.name} type="button" className="example-chip" onClick={() => onExampleSelect(company)}>
+          <img src={`/company-logos/${company.name.toLowerCase()}.png`} alt="" width="20" height="20" className="company-logo" />
+          {company.name}<ArrowRight size={12} aria-hidden="true" />
+        </button>
+      ))}
     </div>
   );
 };
 
-export default ExamplePopup; 
+export default ExamplePopup;

@@ -148,7 +148,7 @@ class BaseResearcher:
             if not queries:
                 raise ValueError(f"No queries generated for {company}")
 
-            queries = queries[:4]  # Limit to 4 queries
+            queries = queries[:2]  # Fast mode: two focused queries per analyst
             logger.info(f"Final queries for {self.analyst_type}: {queries}")
             
             yield {"type": "queries_complete", "queries": queries, "count": len(queries)}
@@ -162,7 +162,7 @@ class BaseResearcher:
         params = {
             "search_depth": "advanced",
             "include_raw_content": False,
-            "max_results": 5
+            "max_results": 3
         }
         
         topic_map = {

@@ -17,7 +17,7 @@ const ResearchStatus = ({
   return (
     <div 
       ref={statusRef} 
-      className={`${glassStyle.base} rounded-2xl p-6 ${fadeInAnimation.fadeIn} ${isResetting ? 'opacity-0 transform -translate-y-4' : 'opacity-100 transform translate-y-0'} bg-white/80 backdrop-blur-sm border-gray-200 font-['DM_Sans']`}
+      className={`${glassStyle.base} rounded-2xl p-6 ${fadeInAnimation.fadeIn} ${isResetting ? 'opacity-0 transform -translate-y-4' : 'opacity-100 transform translate-y-0'} font-sans`}
     >
       <div className="flex items-center space-x-4">
         <div className="flex-shrink-0">
@@ -30,15 +30,15 @@ const ResearchStatus = ({
               <CheckCircle2 className="h-5 w-5 text-[#22C55E]" />
             </div>
           ) : currentPhase === 'search' || currentPhase === 'enrichment' || (status?.step === "Processing" && status.message.includes("scraping")) ? (
-            <div className={`${glassStyle.base} p-2 rounded-full bg-[#468BFF]/10 border-[#468BFF]/20`}>
+            <div className={`${glassStyle.base} p-2 rounded-full bg-[#2677FF]/10 border-[#2677FF]/20`}>
               <Loader2 className="h-5 w-5 animate-spin loader-icon" style={{ stroke: loaderColor }} />
             </div>
           ) : currentPhase === 'briefing' ? (
-            <div className={`${glassStyle.base} p-2 rounded-full bg-[#468BFF]/10 border-[#468BFF]/20`}>
+            <div className={`${glassStyle.base} p-2 rounded-full bg-[#2677FF]/10 border-[#2677FF]/20`}>
               <Loader2 className="h-5 w-5 animate-spin loader-icon" style={{ stroke: loaderColor }} />
             </div>
           ) : (
-            <div className={`${glassStyle.base} p-2 rounded-full bg-[#468BFF]/10 border-[#468BFF]/20`}>
+            <div className={`${glassStyle.base} p-2 rounded-full bg-[#2677FF]/10 border-[#2677FF]/20`}>
               <Loader2 className="h-5 w-5 animate-spin loader-icon" style={{ stroke: loaderColor }} />
             </div>
           )}
