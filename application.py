@@ -53,6 +53,7 @@ class ResearchRequest(BaseModel):
     company_url: str | None = None
     industry: str | None = None
     hq_location: str | None = None
+    tavily_api_key: str | None = None
 
 class PDFGenerationRequest(BaseModel):
     report_content: str
@@ -100,7 +101,7 @@ async def process_research(job_id: str, data: ResearchRequest):
     """Process research request asynchronously and store results"""
     try:
         if mongodb:
-            mongodb.create_job(job_id, data.dict())
+            mongodb.create_job(job_id, data.model_dump(exclude={"tavily_api_key"}))
         
         await asyncio.sleep(0.5)  # Brief delay
         
@@ -111,7 +112,8 @@ async def process_research(job_id: str, data: ResearchRequest):
             url=data.company_url,
             industry=data.industry,
             hq_location=data.hq_location,
-            job_id=job_id
+            job_id=job_id,
+            tavily_api_key=data.tavily_api_key,
         )
 
         final_state = {}

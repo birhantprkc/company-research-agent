@@ -6,8 +6,8 @@ from .base import BaseResearcher
 
 
 class IndustryAnalyzer(BaseResearcher):
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, tavily_api_key: str | None = None) -> None:
+        super().__init__(tavily_api_key)
         self.analyst_type = "industry_analyzer"
 
     async def analyze(self, state: ResearchState):
@@ -53,4 +53,4 @@ class IndustryAnalyzer(BaseResearcher):
             yield event
             if "message" in event or "industry_data" in event:
                 result = event
-        yield result or {} 
+        yield result or {}

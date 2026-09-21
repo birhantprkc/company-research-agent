@@ -16,8 +16,8 @@ from ...prompts import QUERY_FORMAT_GUIDELINES
 logger = logging.getLogger(__name__)
 
 class BaseResearcher:
-    def __init__(self):
-        tavily_key = os.getenv("TAVILY_API_KEY")
+    def __init__(self, tavily_api_key: str | None = None):
+        tavily_key = tavily_api_key or os.getenv("TAVILY_API_KEY")
         openai_key = os.getenv("OPENAI_API_KEY")
         
         if not tavily_key or not openai_key:

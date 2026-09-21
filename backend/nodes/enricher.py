@@ -15,8 +15,8 @@ logger = logging.getLogger(__name__)
 class Enricher:
     """Enriches curated documents with raw content."""
     
-    def __init__(self) -> None:
-        tavily_key = os.getenv("TAVILY_API_KEY")
+    def __init__(self, tavily_api_key: str | None = None) -> None:
+        tavily_key = tavily_api_key or os.getenv("TAVILY_API_KEY")
         if not tavily_key:
             raise ValueError("TAVILY_API_KEY environment variable is not set")
         self.tavily_client = AsyncTavilyClient(api_key=tavily_key)

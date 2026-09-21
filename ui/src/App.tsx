@@ -358,6 +358,7 @@ function App() {
     companyUrl: string;
     companyHq: string;
     companyIndustry: string;
+    tavilyApiKey: string;
   }) => {
 
     // Clear any existing errors first
@@ -397,6 +398,7 @@ function App() {
         company_url: formattedCompanyUrl,
         industry: formData.companyIndustry || undefined,
         hq_location: formData.companyHq || undefined,
+        tavily_api_key: formData.tavilyApiKey.trim(),
       };
 
       const response = await fetch(url, {
@@ -583,6 +585,11 @@ function App() {
             glassStyle={glassStyle.card}
           />
         )}
+        <footer className="demo-footer">
+          <a className="search-api-link" href="https://docs.tavily.com/documentation/api-reference/endpoint/search" target="_blank" rel="noopener noreferrer">
+            Search API docs <span aria-hidden="true">↗</span>
+          </a>
+        </footer>
       </div>
     </div>
   );

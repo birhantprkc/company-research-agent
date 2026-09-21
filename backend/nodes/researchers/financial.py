@@ -6,8 +6,8 @@ from .base import BaseResearcher
 
 
 class FinancialAnalyst(BaseResearcher):
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, tavily_api_key: str | None = None) -> None:
+        super().__init__(tavily_api_key)
         self.analyst_type = "financial_analyzer"
     
     async def analyze(self, state: ResearchState):

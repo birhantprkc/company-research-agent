@@ -21,7 +21,8 @@ from .nodes.researchers import (
 logger = logging.getLogger(__name__)
 
 class Graph:
-    def __init__(self, company=None, url=None, hq_location=None, industry=None, job_id=None):
+    def __init__(self, company=None, url=None, hq_location=None, industry=None, job_id=None, tavily_api_key=None):
+        self.tavily_api_key = tavily_api_key
         # Initialize InputState
         self.input_state = InputState(
             company=company,
@@ -41,13 +42,13 @@ class Graph:
     def _init_nodes(self):
         """Initialize all workflow nodes"""
         self.ground = GroundingNode()
-        self.financial_analyst = FinancialAnalyst()
-        self.news_scanner = NewsScanner()
-        self.industry_analyst = IndustryAnalyzer()
-        self.company_analyst = CompanyAnalyzer()
+        self.financial_analyst = FinancialAnalyst(self.tavily_api_key)
+        self.news_scanner = NewsScanner(self.tavily_api_key)
+        self.industry_analyst = IndustryAnalyzer(self.tavily_api_key)
+        self.company_analyst = CompanyAnalyzer(self.tavily_api_key)
         self.collector = Collector()
         self.curator = Curator()
-        self.enricher = Enricher()
+        self.enricher = Enricher(self.tavily_api_key)
         self.briefing = Briefing()
         self.editor = Editor()
 

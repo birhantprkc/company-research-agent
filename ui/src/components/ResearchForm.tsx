@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Building2, Factory, Globe, Loader2, Search } from 'lucide-react';
+import { Building2, Eye, EyeOff, Factory, Globe, KeyRound, Loader2, Search } from 'lucide-react';
 import LocationInput from './LocationInput';
 import ExamplePopup, { EXAMPLE_COMPANIES } from './ExamplePopup';
 import type { ExampleCompany } from './ExamplePopup';
@@ -9,6 +9,7 @@ interface FormData {
   companyUrl: string;
   companyHq: string;
   companyIndustry: string;
+  tavilyApiKey: string;
 }
 
 interface ResearchFormProps {
@@ -32,38 +33,76 @@ const ResearchForm = ({
     companyUrl: "",
     companyHq: "",
     companyIndustry: "",
+    tavilyApiKey: "",
   });
+  const [isTavilyKeyVisible, setIsTavilyKeyVisible] = useState(false);
   
   const [examplesOpen, setExamplesOpen] = useState(false);
+  const [isExamplesClosing, setIsExamplesClosing] = useState(false);
   const [suggestedExamples, setSuggestedExamples] = useState<ExampleCompany[]>([]);
   const companyFieldRef = useRef<HTMLDivElement>(null);
   const companyInputRef = useRef<HTMLInputElement>(null);
   const closeExamplesTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isHoveringCompanyInput = useRef(false);
+  const isHoveringCompanyPicker = useRef(false);
 
   const cancelExamplesClose = () => {
     if (closeExamplesTimer.current) clearTimeout(closeExamplesTimer.current);
     closeExamplesTimer.current = null;
   };
 
+  const closeExamples = () => {
+    cancelExamplesClose();
+    setIsExamplesClosing(true);
+    closeExamplesTimer.current = setTimeout(() => {
+      setExamplesOpen(false);
+      setIsExamplesClosing(false);
+      closeExamplesTimer.current = null;
+    }, 180);
+  };
+
+  const closeExamplesWhenPointerLeaves = () => {
+    cancelExamplesClose();
+    closeExamplesTimer.current = setTimeout(() => {
+      if (!isHoveringCompanyInput.current && !isHoveringCompanyPicker.current) {
+        closeExamples();
+      }
+    }, 60);
+  };
+
+  const handleCompanyInputEnter = () => {
+    isHoveringCompanyInput.current = true;
+    openExamples();
+  };
+
+  const handleCompanyInputLeave = () => {
+    isHoveringCompanyInput.current = false;
+    closeExamplesWhenPointerLeaves();
+  };
+
+  const handleCompanyPickerEnter = () => {
+    isHoveringCompanyPicker.current = true;
+    openExamples();
+  };
+
+  const handleCompanyPickerLeave = () => {
+    isHoveringCompanyPicker.current = false;
+    closeExamplesWhenPointerLeaves();
+  };
+
   const openExamples = () => {
     cancelExamplesClose();
+    setIsExamplesClosing(false);
     if (!isResearching && !examplesOpen) {
       setSuggestedExamples([...EXAMPLE_COMPANIES].sort(() => Math.random() - 0.5).slice(0, 8));
       setExamplesOpen(true);
     }
   };
 
-  const scheduleExamplesClose = () => {
-    cancelExamplesClose();
-    closeExamplesTimer.current = setTimeout(() => {
-      setExamplesOpen(false);
-    }, 180);
-  };
-
   useEffect(() => {
     const dismissOutside = (event: PointerEvent) => {
       if (event.target instanceof Node && !companyFieldRef.current?.contains(event.target)) {
-        setExamplesOpen(false);
+        closeExamples();
       }
     };
     document.addEventListener('pointerdown', dismissOutside);
@@ -97,12 +136,13 @@ const ResearchForm = ({
       // Add a slight delay to let animations complete
       setTimeout(() => {
         // Reset form fields to empty values
-        setFormData({
+        setFormData((previous) => ({
           companyName: "",
           companyUrl: "",
           companyHq: "",
           companyIndustry: "",
-        });
+          tavilyApiKey: previous.tavilyApiKey,
+        }));
         
         // Show the example suggestion again
         setShowExampleSuggestion(true);
@@ -124,12 +164,13 @@ const ResearchForm = ({
       companyName: example.name,
       companyUrl: example.url,
       companyHq: example.hq,
-      companyIndustry: example.industry
+      companyIndustry: example.industry,
+      tavilyApiKey: formData.tavilyApiKey,
     };
     cancelExamplesClose();
     setFormData(newFormData);
     if (!startResearch) companyInputRef.current?.focus();
-    setExamplesOpen(false);
+    closeExamples();
     if (startResearch) onSubmit(newFormData);
   };
 
@@ -139,10 +180,37 @@ const ResearchForm = ({
       <div className={`${glassStyle.card} research-form`}>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-6">
+            <div className="tavily-key-field">
+              <label htmlFor="tavilyApiKey" className="field-label">
+                Tavily API Key <span className="text-gray-900/70">*</span>
+              </label>
+              <div className="relative">
+                <KeyRound className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 stroke-[#2677FF] z-10" strokeWidth={1.5} />
+                <input
+                  required
+                  id="tavilyApiKey"
+                  type={isTavilyKeyVisible ? 'text' : 'password'}
+                  autoComplete="off"
+                  value={formData.tavilyApiKey}
+                  onChange={(event) => setFormData((previous) => ({ ...previous, tavilyApiKey: event.target.value }))}
+                  className={`${glassStyle.input} tavily-key-input`}
+                  placeholder="Enter your Tavily API key"
+                />
+                <button
+                  type="button"
+                  className="tavily-key-visibility"
+                  onClick={() => setIsTavilyKeyVisible((visible) => !visible)}
+                  aria-label={isTavilyKeyVisible ? 'Hide Tavily API key' : 'Show Tavily API key'}
+                >
+                  {isTavilyKeyVisible ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
+              <p className="tavily-key-help">Used only for this research session and never stored.</p>
+            </div>
             {/* Company Name */}
             <div className="relative group company-primary"
               ref={companyFieldRef}
-              onKeyDown={(event) => { if (event.key === 'Escape') { event.stopPropagation(); setExamplesOpen(false); } }}
+              onKeyDown={(event) => { if (event.key === 'Escape') { event.stopPropagation(); closeExamples(); } }}
             >
               <label
                 htmlFor="companyName"
@@ -155,8 +223,9 @@ const ResearchForm = ({
                 <input
                   required
                   ref={companyInputRef}
-                  onMouseEnter={openExamples}
-                  onMouseLeave={scheduleExamplesClose}
+                  onMouseEnter={handleCompanyInputEnter}
+                  onMouseLeave={handleCompanyInputLeave}
+                  onFocus={openExamples}
                   autoComplete="off"
                   aria-expanded={examplesOpen && matchingExamples.length > 0}
                   aria-controls="company-examples"
@@ -173,10 +242,10 @@ const ResearchForm = ({
               {examplesOpen && !isResearching && matchingExamples.length > 0 && (
                 <div
                   id="company-examples"
-                  className="company-options"
+                  className={`company-options${isExamplesClosing ? ' company-options--closing' : ''}`}
                   aria-label="Example companies"
-                  onMouseEnter={cancelExamplesClose}
-                  onMouseLeave={scheduleExamplesClose}
+                  onMouseEnter={handleCompanyPickerEnter}
+                  onMouseLeave={handleCompanyPickerLeave}
                 >
                   <p className="company-options-label">Choose an example company</p>
                   <div className="company-options-grid">
@@ -268,7 +337,7 @@ const ResearchForm = ({
 
           <button
             type="submit"
-            disabled={isResearching || !formData.companyName.trim()}
+            disabled={isResearching || !formData.companyName.trim() || !formData.tavilyApiKey.trim()}
             className="research-submit"
           >
             <div className="flex items-center justify-center gap-2">

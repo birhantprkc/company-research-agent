@@ -35,7 +35,8 @@ The UI connects to the API with `VITE_API_URL` and receives incremental updates 
 
 - Python 3.11 or later
 - Node.js 18 or later
-- API keys for Tavily, Google Gemini, and OpenAI
+- Google Gemini and OpenAI API keys for the backend
+- A Tavily API key entered in the app for each research session (or a backend fallback key)
 - A Google Maps API key only if you want location autocomplete
 - MongoDB only if you want persistent jobs and reports
 
@@ -57,9 +58,10 @@ The UI connects to the API with `VITE_API_URL` and receives incremental updates 
    ```
 
    ```env
-   TAVILY_API_KEY=your_tavily_key
    GEMINI_API_KEY=your_gemini_key
    OPENAI_API_KEY=your_openai_key
+   # Optional fallback when no per-session Tavily key is supplied
+   TAVILY_API_KEY=your_tavily_key
    # MONGODB_URI=optional_mongodb_connection_string
    ```
 
@@ -124,7 +126,7 @@ curl -X POST http://localhost:8000/research \
 
 | Variable | Required | Used by |
 | --- | --- | --- |
-| `TAVILY_API_KEY` | Yes | Backend research and curation |
+| `TAVILY_API_KEY` | No | Backend fallback for research and curation; visitors can supply their own key in the UI |
 | `GEMINI_API_KEY` | Yes | Backend briefing synthesis |
 | `OPENAI_API_KEY` | Yes | Backend research and report editing |
 | `MONGODB_URI` | No | Backend job/report persistence |

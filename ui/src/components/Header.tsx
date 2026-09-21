@@ -11,8 +11,8 @@ const Header = () => (
       </div>
     </nav>
     <div className="hero">
-      <h1>Company Research Agent</h1>
-      <p className="hero-description">Get to know your next opportunity.<br className="sm:hidden" /> In-depth company research, in one place.</p>
+      <h1>Company Intelligence &amp; Research</h1>
+      <p className="hero-description">Research a company's business, industry, financial context, and recent news, then explore a detailed briefing with linked sources and PDF export.</p>
     </div>
   </header>
 );

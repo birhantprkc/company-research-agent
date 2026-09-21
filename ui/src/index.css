@@ -67,11 +67,11 @@
   .site-nav { display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 16px; min-height: 104px; }
   .brand-link { display: inline-flex; align-items: center; flex-shrink: 0; height: 52px; padding: 0 8px; margin-left: -8px; border-radius: 12px; transition: background 150ms, transform 150ms; }
   .brand-logo { display: block; height: 42px; width: auto; object-fit: contain; }
-  .brand-link:hover { background: var(--color-black-5); transform: translateY(-1px); }
+  .brand-link:hover, .brand-link:focus-visible { background: var(--color-black-5); transform: translateY(-1px); }
   .nav-actions { display: flex; align-items: center; }
   .nav-link { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; color: #000; transition: background 150ms, transform 150ms; }
   .github-logo { display: block; width: 30px; height: 30px; object-fit: contain; }
-  .nav-link:hover { color: #000; background: var(--color-black-5); transform: translateY(-1px); }
+  .nav-link:hover, .nav-link:focus-visible { color: #000; background: var(--color-black-5); transform: translateY(-1px); }
   .hero { max-width: 780px; margin: 0 auto; text-align: center; padding: 52px 0 28px; }
   .hero h1 {
     font-family: var(--font-suisse);
@@ -92,12 +92,20 @@
   .research-input:focus { outline: none; border-color: var(--color-primary-blue); background: var(--color-white); box-shadow: 0 0 0 3px #2677ff12; }
   .research-form .group > .relative > svg, .research-form .group > svg { width: 17px; height: 17px; stroke: var(--color-black-60); pointer-events: none; }
   .company-primary { position: relative; z-index: 30; }
+  .tavily-key-field { padding: 14px; border: 1px solid #2677ff24; border-radius: 14px; background: #2677ff08; }
+  .tavily-key-field .field-label { margin-bottom: 8px; }
+  .tavily-key-input { padding-right: 46px; background: #fffcf6b3; border-color: #2677ff1a; }
+  .tavily-key-visibility { position: absolute; top: 50%; right: 10px; display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; color: var(--color-black-60); transform: translateY(-50%); }
+  .tavily-key-visibility:hover, .tavily-key-visibility:focus-visible { color: var(--color-black); background: var(--color-black-5); }
+  .tavily-key-help { margin: 8px 0 0; color: var(--color-black-60); font-size: 12px; }
   .company-primary > .field-label { font-size: 15px; font-weight: 600; }
   .company-name-input { min-height: 64px; font-size: 17px; background: #fffcf6b3; border-color: var(--color-black-10); }
   .company-subfields { position: relative; z-index: 0; isolation: isolate; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding-top: 22px; border-top: 1px solid var(--color-black-10); }
   .company-subfields .field-label { font-size: 12px; flex-wrap: wrap; }
   .company-subfields .research-input { font-size: 13px; }
-  .company-options { z-index: 50; position: absolute; top: calc(100% + 8px); left: 0; right: 0; padding: 8px; background: #fffcf6b3; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid #fffcf6cc; border-radius: 12px; box-shadow: 0 10px 28px #3c3a2614; }
+  .company-options { z-index: 50; position: absolute; top: calc(100% + 8px); left: 0; right: 0; padding: 8px; background: #fffcf6b3; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid #fffcf6cc; border-radius: 12px; box-shadow: 0 10px 28px #3c3a2614; transform-origin: top center; animation: company-options-pop-in 180ms cubic-bezier(.16, 1, .3, 1) both; }
+  .company-options::before { content: ''; position: absolute; top: -12px; right: 0; left: 0; height: 12px; }
+  .company-options--closing { pointer-events: none; animation: company-options-pop-out 140ms cubic-bezier(.4, 0, 1, 1) both; }
   .company-options-label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
   .company-options-grid { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
   .company-options-grid::-webkit-scrollbar { display: none; }
@@ -142,6 +150,15 @@
 }
 
 @keyframes button-shine { to { transform: translateX(140%); } }
+@keyframes company-options-pop-in {
+  0% { opacity: 0; transform: translateY(-8px) scale(.92); }
+  70% { opacity: 1; transform: translateY(1px) scale(1.012); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes company-options-pop-out {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-4px) scale(.96); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
@@ -149,4 +166,11 @@
 
 @media (prefers-reduced-motion: reduce) {
   .research-submit:hover:not(:disabled), .research-submit:focus-visible:not(:disabled) { transform: none; }
+  .brand-link:hover, .brand-link:focus-visible, .nav-link:hover, .nav-link:focus-visible { transform: none; }
 }
+
+.demo-footer { display: flex; justify-content: flex-end; align-items: center; margin-top: 32px; padding: 12px 0; }
+
+.search-api-link { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; color: #8b887e; font-size: 10px; line-height: 1.5; white-space: nowrap; text-decoration: none; }
+.search-api-link:hover, .search-api-link:focus-visible { color: #2677ff; }
+.search-api-link:focus-visible { outline: 2px solid #2677ff; outline-offset: 4px; border-radius: 2px; }
